@@ -4,23 +4,41 @@
 #include <windows.h>
 using namespace std;
 
-MyHash myhash;
+MyHash myhashEV;
+MyHash myhashVE;
 
 void readFile(){
 	ifstream fi("dict.txt");
 	string line;
 	while(!fi.eof()){
 		getline(fi,line);
-		int l = line.length();
-		int i = 0;
+		if(line == "") break;
+		int i = 0, j = 0;
 		while(line[i] != '@'){
 			i++;
 		}
 		string name = line.substr(0, i);
-		cout << "\nRead word: " << name << " - value: ";
-		string value = line.substr(i+1, l-i-1);
-		cout << value << endl;
-		cout << "Insert to hash success: " << myhash.insertNode(name, value) << endl;
+		i++; 
+		j = i;
+		while(line[i] != '@'){
+			i++;
+		}
+		string value = line.substr(j, i-j);
+		i++; 
+		j = i;
+		while(line[i] != '@'){
+			i++;
+		}
+		string des = line.substr(j, i-j);
+		i++; 
+		j = i;
+		while(line[i] != '\0'){
+			i++;
+		}
+		string exp = line.substr(j, i-j);
+		cout << "\nREAD WORD: " << name << " - " << value << " - " << des << " - " << exp << endl;
+		cout << "Insert to hash EV success: " << myhashEV.insertNode(name, value, des, exp) << endl;
+		cout << "Insert to hash VE success: " << myhashVE.insertNode(value, name, des, exp) << endl;
 	}
 	fi.close();
 	Sleep(2000);
@@ -41,7 +59,7 @@ string checkInput(string line){
 	return line;
 }
 
-void findWord(){
+void findWord(int flag){
 	fflush(stdin);
 	do{ 
     	cout << "\n\n               Chuc nang da chon: Tim tu. \n\n";
@@ -54,7 +72,8 @@ void findWord(){
 	        system("cls");
 			break;
 	    }   
-		cout << myhash.getValueByName(name);
+		if(flag == 0) myhashEV.getValueByName(name);
+		else myhashVE.getValueByName(name);
 		getchar();
 		system("cls");
 	}while(1);
@@ -86,8 +105,9 @@ void menu(){
 	sayHello();
 	while(choose1!=12){
 		cout << "\n\n\n\t                H2T DICT: \n\n" << endl;
-		cout << "\t                    1. Tim tu.  " << endl;
-		cout << "\t                    2. Thoat chuong trinh. \n\n" << endl;
+		cout << "\t                    1. Tim tu E-V.  " << endl;
+		cout << "\t                    2. Tim tu V-E.  " << endl;
+		cout << "\t                    3. Thoat chuong trinh. \n\n" << endl;
 		fflush(stdin);
 		cin >> choose;
 		choose = checkInput(choose);
@@ -100,8 +120,9 @@ void menu(){
 	    else {
 	        system("cls");
 		    switch(choose1){
-			    case 1: cin.ignore(); findWord(); break;
-			    case 2: sayGoodbye(); exit(1); break; 
+			    case 1: cin.ignore(); findWord(0); break;
+			    case 2: cin.ignore(); findWord(1); break;
+				case 3: sayGoodbye(); exit(1); break; 
 			    default: cout << "Moi nhap lai!" << endl;
 		    }
 	    }

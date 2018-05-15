@@ -9,7 +9,7 @@ class MyHash{
 		BaseList bhm[26];
 		MyHash();
 		~MyHash();
-		bool insertNode(string, string);
+		bool insertNode(string, string, string, string);
 		string getValueByName(string);
 };
 
@@ -26,10 +26,10 @@ MyHash::~MyHash(){
 	cout << "\nDROP HASH MAP SUCCESS\n";
 }
 
-bool MyHash::insertNode(string name, string value){
-	cout << "INSERT NODE: " << name << " - " << value << endl;
+bool MyHash::insertNode(string name, string value, string des, string exp){
+	cout << "INSERT NODE: " << name << endl;
 	cout <<"Hash to: "<< tolower(name[0])-97 << endl;
-	cout << "Insert to list success: " << this->bhm[tolower(name[0])-97].insertNode(name, value) << endl;
+	cout << "Insert to list success: " << this->bhm[tolower(name[0])-97].insertNode(name, value, des, exp) << endl;
 	return true;
 }
 
@@ -37,4 +37,3 @@ string MyHash::getValueByName(string name){
 	name = cleanSpace(toLowerStr(name));
 	return this->bhm[name[0]-97].getValue(name);
 }
-

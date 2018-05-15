@@ -1,6 +1,6 @@
-cat@meo
-dog@cho
-car@oto
-heart@trai tim
-school@truong hoc
-superman@Dam Minh Tien
+cat@meo@a cat goes to school@cat dung khi mieu ta ve con meo
+dog@cho@a dog goes to school@dog dung khi mieu ta ve con cho
+car@oto@a car park near school@car dung khi mieu ta ve oto
+heart@trai tim@you break down my heart@heart thuong khi mieu ta ve trai tim
+school@truong hoc@i go to school@school dung khi mieu ta ve ngoi truong
+superman@Dam Minh Tien@superman go to school@superman Tien dz

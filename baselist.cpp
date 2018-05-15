@@ -8,7 +8,7 @@ class BaseList{
 		int countNode;
 		ListNode *baseNode;
 		BaseList();
-		bool insertNode(string, string);
+		bool insertNode(string, string, string, string);
 		string getValue(string);
 		void printList();
 };
@@ -18,11 +18,13 @@ BaseList::BaseList(){
 	this->baseNode = NULL;
 }
 
-bool BaseList::insertNode(string name, string value){
+bool BaseList::insertNode(string name, string value, string des, string exp){
 	cout << "Insert node - " << endl;
 	name = cleanSpace(toLowerStr(name));
 	value = cleanSpace(toLowerStr(value));
-	ListNode *ln = new ListNode(name, value);
+	des = cleanSpace(toLowerStr(des));
+	exp = cleanSpace(toLowerStr(exp));
+	ListNode *ln = new ListNode(name, value, des, exp);
 	if(ln == NULL){
 		cout << "MALLOC listnode FAILED\n";
 		return false;
@@ -36,8 +38,6 @@ bool BaseList::insertNode(string name, string value){
 		cout << "ERROR: NULL INPUT\n";
 		return false;
 	}
-	//ln->name = name;
-	//ln->value = value;
 	cout << "UPDATE listnode SUCCESS\n";
 	if(this->baseNode == NULL) this->baseNode = ln;
 	else{
@@ -63,7 +63,8 @@ string BaseList::getValue(string name){
 		cout << "Not found" << endl;
 		return "";
 	}
+	cout << "\t Nghia: " << temp->value << endl;
+	cout << "\t Vi du: " << temp->example << endl;
+	cout << "\t Cach su dung: " << temp->description << endl;
 	return temp->value;
 }
-
-
