@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <typeinfo>
 #include "baselist.cpp"
-#include "mystring.cpp"
 using namespace std;
 
 class MyHash{
@@ -11,6 +10,7 @@ class MyHash{
 		MyHash();
 		~MyHash();
 		bool insertNode(string, string);
+		string getValueByName(string);
 };
 
 MyHash::MyHash(){
@@ -22,33 +22,19 @@ MyHash::MyHash(){
 
 MyHash::~MyHash(){
 	for(int i = 0; i < 26; i++)
-		free(bhm[i].next);
+		free(bhm[i].baseNode);
 	cout << "\nDROP HASH MAP SUCCESS\n";
 }
 
 bool MyHash::insertNode(string name, string value){
 	cout << "INSERT NODE: " << name << " - " << value << endl;
-	ListNode *ln;
-	ListNode ln0;
-	ln = & ln0;
-	if(ln == NULL){
-		cout << "MALLOC listnode FAILED\n";
-		return false;
-	}
-	if(name == "" || value == ""){
-		cout << "ERROR: NULL INPUT\n";
-		return false;
-	}
-	name = cleanSpace(toLowerStr(name));
-	value = cleanSpace(toLowerStr(value));
-	if(name == "" || value == ""){
-		cout << "ERROR: NULL INPUT\n";
-		return false;
-	}
-	ln->name = name;
-	ln->value = value;
 	cout <<"Hash to: "<< tolower(name[0])-97 << endl;
-	cout << "Insert to list success: " << this->bhm[tolower(name[0])-97].insertNode(ln) << endl;
+	cout << "Insert to list success: " << this->bhm[tolower(name[0])-97].insertNode(name, value) << endl;
 	return true;
+}
+
+string MyHash::getValueByName(string name){
+	name = cleanSpace(toLowerStr(name));
+	return this->bhm[name[0]-97].getValue(name);
 }
 
